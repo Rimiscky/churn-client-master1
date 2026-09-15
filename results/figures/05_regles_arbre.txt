@@ -1,0 +1,94 @@
+Seuils numériques exprimés dans les variables standardisées du pipeline.
+Les colonnes one-hot valent 0 ou 1. Classes pondérées à l’entraînement.
+
+|--- cat__Contract_Month-to-month <= 0.500
+|   |--- num__MonthlyCharges <= 0.954
+|   |   |--- cat__OnlineSecurity_No <= 0.500
+|   |   |   |--- cat__Contract_Two year <= 0.500
+|   |   |   |   |--- num__MonthlyCharges <= 0.240
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- num__MonthlyCharges >  0.240
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- cat__Contract_Two year >  0.500
+|   |   |   |   |--- cat__OnlineBackup_No <= 0.500
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- cat__OnlineBackup_No >  0.500
+|   |   |   |   |   |--- class: 0
+|   |   |--- cat__OnlineSecurity_No >  0.500
+|   |   |   |--- cat__Contract_Two year <= 0.500
+|   |   |   |   |--- cat__PaymentMethod_Mailed check <= 0.500
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- cat__PaymentMethod_Mailed check >  0.500
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- cat__Contract_Two year >  0.500
+|   |   |   |   |--- num__MonthlyCharges <= -0.161
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- num__MonthlyCharges >  -0.161
+|   |   |   |   |   |--- class: 0
+|   |--- num__MonthlyCharges >  0.954
+|   |   |--- cat__Contract_Two year <= 0.500
+|   |   |   |--- cat__Dependents_Yes <= 0.500
+|   |   |   |   |--- num__MonthlyCharges <= 1.270
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- num__MonthlyCharges >  1.270
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- cat__Dependents_Yes >  0.500
+|   |   |   |   |--- num__MonthlyCharges <= 1.288
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- num__MonthlyCharges >  1.288
+|   |   |   |   |   |--- class: 0
+|   |   |--- cat__Contract_Two year >  0.500
+|   |   |   |--- num__TotalCharges <= 2.395
+|   |   |   |   |--- num__MonthlyCharges <= 1.360
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- num__MonthlyCharges >  1.360
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- num__TotalCharges >  2.395
+|   |   |   |   |--- class: 0
+|--- cat__Contract_Month-to-month >  0.500
+|   |--- cat__InternetService_Fiber optic <= 0.500
+|   |   |--- num__tenure <= -1.098
+|   |   |   |--- cat__TechSupport_No <= 0.500
+|   |   |   |   |--- num__TotalCharges <= -1.001
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- num__TotalCharges >  -1.001
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- cat__TechSupport_No >  0.500
+|   |   |   |   |--- cat__OnlineSecurity_Yes <= 0.500
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- cat__OnlineSecurity_Yes >  0.500
+|   |   |   |   |   |--- class: 1
+|   |   |--- num__tenure >  -1.098
+|   |   |   |--- cat__PhoneService_Yes <= 0.500
+|   |   |   |   |--- cat__Dependents_Yes <= 0.500
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- cat__Dependents_Yes >  0.500
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- cat__PhoneService_Yes >  0.500
+|   |   |   |   |--- num__tenure <= -0.406
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- num__tenure >  -0.406
+|   |   |   |   |   |--- class: 0
+|   |--- cat__InternetService_Fiber optic >  0.500
+|   |   |--- num__tenure <= -0.773
+|   |   |   |--- num__TotalCharges <= -0.958
+|   |   |   |   |--- num__MonthlyCharges <= 0.171
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- num__MonthlyCharges >  0.171
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- num__TotalCharges >  -0.958
+|   |   |   |   |--- num__MonthlyCharges <= 0.440
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- num__MonthlyCharges >  0.440
+|   |   |   |   |   |--- class: 1
+|   |   |--- num__tenure >  -0.773
+|   |   |   |--- cat__PaymentMethod_Electronic check <= 0.500
+|   |   |   |   |--- num__tenure <= 0.774
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- num__tenure >  0.774
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- cat__PaymentMethod_Electronic check >  0.500
+|   |   |   |   |--- num__tenure <= 0.937
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- num__tenure >  0.937
+|   |   |   |   |   |--- class: 1

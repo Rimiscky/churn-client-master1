@@ -1,0 +1,51 @@
+{
+  "depth": 5,
+  "leaves": 31,
+  "nodes": 61,
+  "root_split": {
+    "feature": "cat__Contract_Month-to-month",
+    "threshold_transformed": 0.5
+  },
+  "train_accuracy": 0.7548810791622294,
+  "test_accuracy": 0.751596877217885,
+  "train_roc_auc": 0.8516718771842358,
+  "test_roc_auc": 0.8318930997959132,
+  "largest_leaves": [
+    {
+      "leaf_id": 8,
+      "conditions": [
+        "Contrat : mensuel : modalité absente",
+        "MonthlyCharges <= 93.675",
+        "Sécurité en ligne : non : modalité absente",
+        "Contrat : 2 ans : modalité présente",
+        "Sauvegarde en ligne : non : modalité absente"
+      ],
+      "train_clients": 786,
+      "observed_churn_rate_train": 0.008905852417302799
+    },
+    {
+      "leaf_id": 5,
+      "conditions": [
+        "Contrat : mensuel : modalité absente",
+        "MonthlyCharges <= 93.675",
+        "Sécurité en ligne : non : modalité absente",
+        "Contrat : 2 ans : modalité absente",
+        "MonthlyCharges <= 72.175"
+      ],
+      "train_clients": 470,
+      "observed_churn_rate_train": 0.027659574468085105
+    },
+    {
+      "leaf_id": 59,
+      "conditions": [
+        "Contrat : mensuel : modalité présente",
+        "Internet : fibre optique : modalité présente",
+        "tenure > 13.500",
+        "Paiement : chèque électronique : modalité présente",
+        "tenure <= 55.500"
+      ],
+      "train_clients": 453,
+      "observed_churn_rate_train": 0.5231788079470199
+    }
+  ]
+}

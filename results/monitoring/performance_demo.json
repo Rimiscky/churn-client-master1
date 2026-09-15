@@ -1,0 +1,21 @@
+{
+  "rows": 20,
+  "observed_churn": 2,
+  "accuracy": 0.7,
+  "precision": 0.25,
+  "recall": 1.0,
+  "f1": 0.4,
+  "roc_auc": 0.8611111111111112,
+  "confusion_matrix": [
+    [
+      12,
+      6
+    ],
+    [
+      0,
+      2
+    ]
+  ],
+  "note": "N’utiliser que des résultats dont la période d’observation est complète.",
+  "scenario": "Démonstration sur 20 clients du test historique, pas des résultats futurs."
+}

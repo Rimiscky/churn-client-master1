@@ -1,0 +1,10 @@
+.git
+.venv
+venv
+work
+runtime
+data
+notebooks
+tests
+*.zip
+**/__pycache__

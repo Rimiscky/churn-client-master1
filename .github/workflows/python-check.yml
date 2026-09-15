@@ -1,27 +1,60 @@
-name: Python check
-
+name: Tests, conteneur et dashboard
 on:
   push:
+    branches: [main]
   pull_request:
-
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: livraison-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   tests:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Récupérer le dépôt
-        uses: actions/checkout@v4
-
-      - name: Installer Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-
-      - name: Vérifier la syntaxe du script
-        run: python -m py_compile src/train.py
-
-      - name: Installer les dépendances des tests
-        run: python -m pip install numpy pandas 'scikit-learn>=1.2' matplotlib
-
-      - name: Vérifier le nettoyage et la cohérence script-notebook
+          python-version: '3.14'
+          cache: pip
+      - name: Installer les dépendances
+        run: pip install -r requirements-runtime.txt
+      - name: Vérifier les comportements et les exports
         run: python -m unittest discover -s tests -v
+      - name: Construire le conteneur de démonstration
+        run: docker build -t churn-demo .
+      - name: Vérifier le conteneur en fonctionnement
+        run: |
+          docker run -d --name churn-demo -p 8000:8000 churn-demo
+          for attempt in $(seq 1 30); do
+            if curl --fail http://127.0.0.1:8000/health; then break; fi
+            sleep 2
+          done
+          curl --fail http://127.0.0.1:8000/health
+          curl --fail -H 'Content-Type: application/json' --data-binary @data/examples/requete_api.json http://127.0.0.1:8000/predict > /tmp/predictions.json
+          python -c "import json; r=json.load(open('/tmp/predictions.json')); assert len(r['predictions']) == 20"
+          curl --fail http://127.0.0.1:8000/monitoring
+      - name: Préparer le dashboard autonome
+        if: github.event_name != 'pull_request'
+        run: |
+          mkdir -p public
+          cp results/dashboard/index.html public/index.html
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: public
+  deploy-dashboard:
+    if: github.event_name != 'pull_request'
+    needs: tests
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer après réussite des tests
+        id: deployment
+        uses: actions/deploy-pages@v4

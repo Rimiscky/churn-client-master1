@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Churn client | SAMBALA Rimiscky</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f8;color:#183247;font:16px/1.55 system-ui,sans-serif}main{max-width:1320px;margin:auto;padding:28px}.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#597083}header{display:flex;justify-content:space-between;align-items:flex-start;gap:25px}h1{font-size:40px;line-height:1.12;margin:10px 0 14px;letter-spacing:-.025em}h2{font-size:20px;margin:0 0 14px}p{margin:6px 0 12px}.badge{padding:8px 14px;border:1px solid #b7c9d9;border-radius:30px;white-space:nowrap;font-size:13px}a{color:#155f9e}button,select,input{font:inherit}button,select{min-height:43px;border:1px solid #b9c8d4;border-radius:7px;background:white;color:#183247;padding:8px 12px}button{cursor:pointer}button:hover{background:#e9f0f6}:focus-visible{outline:3px solid #c75c17;outline-offset:3px}.notice{border-left:4px solid #c75c17;background:#fff6ee;padding:12px 18px;margin:20px 0}.filters{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr auto;gap:16px;align-items:end;padding:20px;background:white;border:1px solid #dbe3ea;border-radius:12px}label{display:block;font-size:13px;font-weight:650;margin-bottom:7px}select{width:100%}input[type=range]{width:100%;accent-color:#c75c17;min-height:30px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0}.card,.panel{background:white;border:1px solid #dbe3ea;border-radius:12px;padding:22px}.number{font-size:35px;letter-spacing:-.025em;font-weight:700}.muted{font-size:13px;color:#526779}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}.chart{height:320px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}caption{text-align:left;color:#526779;margin-bottom:15px}th,td{text-align:left;padding:12px;border-bottom:1px solid #e5ebf0}th{font-size:12px;text-transform:uppercase;letter-spacing:.04em}.yes{color:#9d430e;font-weight:700}.table-head,.pagination{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:12px 0}.pagination{justify-content:flex-end}.tag{display:inline-block;background:#eaf0f6;border-radius:5px;padding:2px 7px}footer{padding:25px 0;color:#526779;font-size:13px}details{background:white;border:1px solid #dbe3ea;border-radius:12px;padding:20px;margin:18px 0}summary{cursor:pointer;font-weight:650}details img{max-width:100%;height:auto}.hidden{display:none}@media(max-width:850px){main{padding:16px}header{display:block}.badge{display:inline-block;margin-top:8px}h1{font-size:32px}.filters{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}@media(max-width:480px){.filters{grid-template-columns:1fr}.cards{gap:8px}.card{padding:12px}.number{font-size:28px}}@media print{button,.filters,.pagination{display:none}.grid{display:block}.panel{break-inside:avoid}.badge{white-space:normal}}
+</style><script>__PLOTLY__</script></head>
+<body><main><header><div><div class="eyebrow">SAMBALA Rimiscky · Master 1 · Projet 3</div><h1>Comprendre les clients<br>qui risquent de partir.</h1><p>Explorez les prédictions sur les <strong>1 409 clients du jeu de test</strong>.</p></div><span class="badge">Données historiques Telco · 15 septembre 2026</span></header>
+<div class="notice"><strong>Exploration pédagogique.</strong> Le seuil change les alertes, pas le modèle. Ne choisissez pas un seuil opérationnel sur ce jeu de test. Les scores ne sont pas des probabilités calibrées.</div>
+<section class="filters" aria-label="Filtres d'exploration"><div><label for="model">Modèle</label><select id="model"></select></div><div><label for="contract">Contrat</label><select id="contract"><option value="">Tous les contrats</option></select></div><div><label for="internet">Internet</label><select id="internet"><option value="">Tous les services</option></select></div><div><label for="threshold">Seuil d'alerte : <output id="threshold-value">0,50</output></label><input id="threshold" type="range" min="0" max="1" step="0.01" value="0.5"></div><button id="reset">Réinitialiser</button></section>
+<p id="status" class="muted" aria-live="polite"></p>
+<section class="cards" aria-label="Indicateurs"><div class="card"><div class="muted">Clients sélectionnés</div><div class="number" id="count"></div><div class="muted" id="actual"></div></div><div class="card"><div class="muted">Clients signalés</div><div class="number" id="flagged"></div><div class="muted" id="flagged-rate"></div></div><div class="card"><div class="muted">Départs détectés (rappel)</div><div class="number" id="recall"></div><div class="muted">Parmi les départs réels</div></div><div class="card"><div class="muted">Alertes justes (précision)</div><div class="number" id="precision"></div><div class="muted">Parmi les clients signalés</div></div></section>
+<section class="grid"><div class="panel"><h2>Quels types d'erreurs ?</h2><div id="matrix" class="chart" role="img" aria-label="Matrice de confusion"></div><p id="matrix-text" class="muted"></p></div><div class="panel"><h2>Comment les scores se répartissent-ils ?</h2><div id="histogram" class="chart" role="img" aria-label="Distribution des scores"></div><p class="muted">Survolez les barres pour lire les effectifs. La ligne orange représente le seuil.</p></div></section>
+<section class="panel"><div class="table-head"><h2>Explorer les clients du test</h2><div><label for="sort">Ordre de la liste</label><select id="sort"><option value="desc">Score décroissant</option><option value="asc">Score croissant</option></select></div><button id="download">Exporter la sélection CSV</button></div><div class="table-wrap"><table><caption>Identifiants de démonstration anonymisés. Les données réelles de départ sont connues uniquement pour l'évaluation.</caption><thead><tr><th scope="col">Client</th><th scope="col">Contrat</th><th scope="col">Internet</th><th scope="col">Ancienneté</th><th scope="col">Score</th><th scope="col">Signalé</th><th scope="col">Départ réel</th></tr></thead><tbody id="rows"></tbody></table></div><div class="pagination"><button id="previous">Précédent</button><span id="page" aria-live="polite"></span><button id="next">Suivant</button></div></section>
+<details><summary>Comment lire ces résultats ?</summary><p>Les filtres mettent à jour les indicateurs, les deux graphiques et le tableau. Le rappel est la proportion des départs réels repérés ; la précision est la proportion d'alertes correspondant à un départ. Un indicateur sans dénominateur est indiqué « Non calculable ».</p><p>Les sous-groupes sont parfois petits : leurs résultats peuvent varier fortement. Une association ne prouve pas une cause. Le modèle est entraîné sur 5 634 autres clients ; aucun client de cette page n'a servi à cet entraînement.</p><p>Les fichiers sources, les tests et les limites sont inclus dans le rendu. Ce dashboard autonome fonctionne hors connexion et ne transmet aucune donnée.</p></details>
+<footer>Pipeline scikit-learn · Visualisations Plotly · Jeu de test historique, aucune campagne de rétention évaluée.</footer></main>
+<script>
+'use strict';
+// Les données proviennent exclusivement du jeu de test, avec des identifiants de démonstration.
+const DATA=__DATA__;
+const MODELS=__MODELS__;
+const labels={'Month-to-month':'Mensuel','One year':'1 an','Two year':'2 ans','Fiber optic':'Fibre optique','DSL':'DSL','No':'Sans Internet'};
+const $=id=>document.getElementById(id);
+const format=new Intl.NumberFormat('fr-FR',{maximumFractionDigits:1});
+const percent=value=>value===null?'Non calculable':format.format(value*100)+' %';
+let page=0,filtered=[];
+for(const name of MODELS){const o=new Option(name,name);$('model').add(o);}
+for(const [id,key] of [['contract','contract'],['internet','internet']]){for(const v of [...new Set(DATA.map(r=>r[key]))].sort())$(id).add(new Option(labels[v]||v,v));}
+const config={responsive:true,displayModeBar:false,displaylogo:false};
+function currentScore(row){return row.scores[MODELS.indexOf($('model').value)];}
+function render(){
+ const threshold=Number($('threshold').value);
+ $('threshold-value').textContent=threshold.toFixed(2).replace('.',',');
+ filtered=DATA.filter(r=>(!$('contract').value||r.contract===$('contract').value)&&(!$('internet').value||r.internet===$('internet').value));
+ filtered.sort((a,b)=>($('sort').value==='asc'?1:-1)*(currentScore(a)-currentScore(b)));
+ let tp=0,tn=0,fp=0,fn=0;
+ for(const r of filtered){const flag=currentScore(r)>=threshold;if(r.actual){flag?tp++:fn++;}else{flag?fp++:tn++;}}
+ $('count').textContent=format.format(filtered.length);$('actual').textContent=(tp+fn)+' départs observés';
+ $('flagged').textContent=format.format(tp+fp);$('flagged-rate').textContent=filtered.length?percent((tp+fp)/filtered.length)+' de la sélection':'Aucun client';
+ $('recall').textContent=percent(tp+fn?tp/(tp+fn):null);$('precision').textContent=percent(tp+fp?tp/(tp+fp):null);
+ $('status').textContent=filtered.length+' clients affichés sur '+DATA.length+' · '+$('model').value;
+ $('matrix-text').textContent=`${tn} restent sans alerte ; ${fp} fausses alertes ; ${fn} départs manqués ; ${tp} départs détectés.`;
+ Plotly.react('matrix',[{type:'heatmap',z:[[tn,fp],[fn,tp]],x:['Reste','Part'],y:['Reste','Part'],text:[[tn,fp],[fn,tp]],texttemplate:'%{text}',colorscale:[[0,'#edf3f9'],[1,'#2463a5']],showscale:false,hovertemplate:'Réel : %{y}<br>Prédit : %{x}<br>%{z} clients<extra></extra>'}],{margin:{t:12,b:55,l:65,r:15},font:{family:'system-ui',color:'#183247'},xaxis:{title:{text:'Prédiction'}},yaxis:{title:{text:'Réalité'},autorange:'reversed'},paper_bgcolor:'white'},config);
+ Plotly.react('histogram',[{type:'histogram',x:filtered.filter(r=>!r.actual).map(currentScore),name:'Reste',marker:{color:'#2463a5'},opacity:.65,xbins:{start:0,end:1,size:.05}},{type:'histogram',x:filtered.filter(r=>r.actual).map(currentScore),name:'Part',marker:{color:'#c75c17'},opacity:.65,xbins:{start:0,end:1,size:.05}}],{barmode:'overlay',margin:{t:12,b:55,l:50,r:15},font:{family:'system-ui',color:'#183247'},xaxis:{title:{text:'Score du modèle'},range:[0,1]},yaxis:{title:{text:'Clients'},rangemode:'tozero'},legend:{orientation:'h',y:1.12},shapes:[{type:'line',x0:threshold,x1:threshold,y0:0,y1:1,yref:'paper',line:{color:'#c75c17',dash:'dash'}}]},config);
+ page=Math.min(page,Math.max(0,Math.ceil(filtered.length/25)-1));renderTable();
+}
+function renderTable(){
+ const threshold=Number($('threshold').value);$('rows').replaceChildren();
+ for(const r of filtered.slice(page*25,(page+1)*25)){
+  const tr=document.createElement('tr');const score=currentScore(r);
+  for(const value of [r.client,labels[r.contract]||r.contract,labels[r.internet]||r.internet,r.tenure+' mois',score.toFixed(3).replace('.',','),score>=threshold?'Oui':'Non',r.actual?'Oui':'Non']){const td=document.createElement('td');td.textContent=value;tr.append(td);}
+  $('rows').append(tr);
+ }
+ $('page').textContent=filtered.length?`${page*25+1} à ${Math.min((page+1)*25,filtered.length)} sur ${filtered.length}`:'Aucun client pour ces filtres';
+ $('previous').disabled=page===0;$('next').disabled=(page+1)*25>=filtered.length;
+}
+for(const id of ['model','contract','internet','threshold','sort'])$(id).addEventListener(id==='threshold'?'input':'change',()=>{page=0;render();});
+$('reset').onclick=()=>{for(const id of ['contract','internet'])$(id).value='';$('model').selectedIndex=0;$('threshold').value=.5;$('sort').value='desc';page=0;render();};
+$('previous').onclick=()=>{page--;renderTable();};$('next').onclick=()=>{page++;renderTable();};
+$('download').onclick=()=>{
+ const quote=v=>'"'+String(v).replaceAll('"','""')+'"';
+ const rows=[['client','contrat','internet','anciennete_mois','score','alerte','depart_reel'],...filtered.map(r=>[r.client,r.contract,r.internet,r.tenure,currentScore(r),currentScore(r)>=Number($('threshold').value),r.actual])];
+ const url=URL.createObjectURL(new Blob(['\ufeff'+rows.map(r=>r.map(quote).join(';')).join('\n')],{type:'text/csv;charset=utf-8'}));
+ const a=document.createElement('a');a.href=url;a.download='selection_churn.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+render();
+</script></body></html>
