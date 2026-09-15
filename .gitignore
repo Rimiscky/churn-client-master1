@@ -1,0 +1,24 @@
+# Données brutes : jamais versionnées (trop lourdes, et pas notre code)
+data/raw/*.csv
+data/raw/*.zip
+
+# Environnement virtuel Python
+.venv/
+venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Cache des notebooks Jupyter
+.ipynb_checkpoints/
+
+# Fichiers d'IDE / OS
+.DS_Store
+.vscode/
+
+# Données intermédiaires et journaux locaux
+data/processed/
+runtime/
+work/
+*.log

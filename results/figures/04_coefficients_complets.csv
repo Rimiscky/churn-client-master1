@@ -1,0 +1,46 @@
+variable,libelle,coefficient
+num__MonthlyCharges,Frais mensuels (standardisé),-2.0411428368928703
+num__tenure,Ancienneté (standardisé),-1.1663018193505448
+cat__InternetService_DSL,Internet : DSL,-1.101405564314353
+cat__Contract_Two year,Contrat : 2 ans,-0.8288212790678917
+cat__OnlineSecurity_No internet service,Sécurité en ligne : sans Internet,-0.5590281006635105
+cat__StreamingTV_No internet service,TV en streaming : sans Internet,-0.5590281006635105
+cat__InternetService_No,Internet : non,-0.5590281006635105
+cat__StreamingMovies_No internet service,Films en streaming : sans Internet,-0.5590281006635105
+cat__TechSupport_No internet service,Support technique : sans Internet,-0.5590281006635105
+cat__OnlineBackup_No internet service,Sauvegarde en ligne : sans Internet,-0.5590281006635105
+cat__DeviceProtection_No internet service,Protection appareil : sans Internet,-0.5590281006635105
+cat__PhoneService_No,Téléphone : non,-0.44351383854131654
+cat__MultipleLines_No phone service,Lignes multiples : sans téléphone,-0.44351383854131654
+cat__StreamingMovies_No,Films en streaming : non,-0.3277435626279944
+cat__PaperlessBilling_No,Facture dématérialisée : non,-0.31481264616023963
+cat__StreamingTV_No,TV en streaming : non,-0.31442441037335
+cat__Dependents_Yes,Personnes à charge : oui,-0.26348231413557194
+cat__MultipleLines_No,Lignes multiples : non,-0.21312556570887445
+cat__PaymentMethod_Bank transfer (automatic),Paiement : virement automatique,-0.1883065328984006
+cat__PaymentMethod_Credit card (automatic),Paiement : carte automatique,-0.1865111767541937
+cat__gender_Female,Genre : femme,-0.16527173232260992
+cat__Partner_No,Conjoint : non,-0.1570470993349148
+cat__Partner_Yes,Conjoint : oui,-0.1398298684136908
+cat__PaymentMethod_Mailed check,Paiement : chèque postal,-0.13375134335577069
+cat__gender_Male,Genre : homme,-0.13160523542596092
+cat__Contract_One year,Contrat : 1 an,-0.09899189858395484
+cat__Dependents_No,Personnes à charge : non,-0.03339465361301136
+cat__DeviceProtection_No,Protection appareil : non,-0.012745414974002198
+cat__PaperlessBilling_Yes,Facture dématérialisée : oui,0.017935678411643566
+cat__OnlineBackup_No,Sauvegarde en ligne : non,0.04459846658672038
+num__SeniorCitizen,Client senior (standardisé),0.05688686275839568
+cat__OnlineSecurity_Yes,Sécurité en ligne : oui,0.08730449123776002
+cat__TechSupport_Yes,Support technique : oui,0.12277956640324034
+cat__TechSupport_No,Support technique : non,0.13937156651166221
+cat__PhoneService_Yes,Téléphone : oui,0.14663687079272547
+cat__OnlineSecurity_No,Sécurité en ligne : non,0.1748466416771481
+cat__PaymentMethod_Electronic check,Paiement : chèque électronique,0.21169208525975683
+cat__OnlineBackup_Yes,Sauvegarde en ligne : oui,0.21755266632818795
+cat__DeviceProtection_Yes,Protection appareil : oui,0.2748965478889116
+cat__MultipleLines_Yes,Lignes multiples : oui,0.35976243650160866
+num__TotalCharges,Frais totaux (standardisé),0.5019669089717194
+cat__StreamingTV_Yes,TV en streaming : oui,0.5765755432882649
+cat__StreamingMovies_Yes,Films en streaming : oui,0.58989469554291
+cat__Contract_Month-to-month,Contrat : mensuel,0.63093620990327
+cat__InternetService_Fiber optic,Internet : fibre optique,1.3635566972292725

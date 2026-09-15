@@ -1,0 +1,17 @@
+# Manipulation de données
+pandas
+numpy
+
+# Machine Learning : modèles, split train/test, métriques, GridSearchCV
+# sparse_output dans OneHotEncoder nécessite au minimum la version 1.2.
+scikit-learn>=1.2
+
+# Visualisation statique (EDA, courbes ROC, importance des variables)
+matplotlib
+seaborn
+
+# Visualisation interactive (dashboard de consultation des prédictions)
+plotly
+
+# Pour exécuter les notebooks
+jupyter
